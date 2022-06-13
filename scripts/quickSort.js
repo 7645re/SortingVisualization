@@ -1,6 +1,3 @@
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
 
 async function swap(array, leftIndex, rightIndex) {
     let temp = array[leftIndex]
@@ -13,7 +10,7 @@ async function swap(array, leftIndex, rightIndex) {
     firstElement.style.backgroundColor = "red"
     secondElement.style.backgroundColor = "red"
     await resideElementsById(firstElement, secondElement)
-    await delay(100)
+    await delay(speedOfSorting)
     firstElement.style.backgroundColor = "rgb(72, 191, 132)"
     secondElement.style.backgroundColor = "rgb(72, 191, 132)"
 }

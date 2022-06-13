@@ -1,12 +1,22 @@
 var boxOfNumber = document.getElementsByClassName("box")[0]
 var sliderMaxNumber = document.getElementsByClassName("sliderMaxNumber")[0]
 var sliderCountNumber = document.getElementsByClassName("sliderCountNumber")[0]
-var buttonFillArray = document.getElementsByClassName("buttonFillArray")[0]
+var sliderSpeedSorting = document.getElementsByClassName("sliderSpeedSorting")[0]
+var buttonQuickSort = document.getElementsByClassName("buttonQuickSort")[0]
+var buttonInsertionSort = document.getElementsByClassName("buttonInsertionSort")[0]
+var workFlow = document.getElementsByClassName("workflow")[0]
 var sliderMaxNumberIndicator = document.getElementsByClassName("sliderMaxNumberIndicator")[0]
 var sliderCountNumberIndicator = document.getElementsByClassName("sliderCountNumberIndicator")[0]
+var sliderSpeedSortingIndicator = document.getElementsByClassName("sliderSpeedSortingIndicator")[0]
 var suffixs = ["", "k", "M", "G", "T", "P", "E"];
-let array = []
+var speedOfSorting = 10
+let array
 let flag = true
+
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
 
 // Function to reduce the number using prefixes
 function abbreviateNumber(number) {
@@ -28,10 +38,10 @@ function grow(element, height) {
 
 function fillArrayAndCreateBlock(array, length, maxElement) {
     // delete old blocks with numbers 
-    document.body.removeChild(boxOfNumber)
+    workFlow.removeChild(boxOfNumber)
     boxOfNumber = document.createElement("div")
     boxOfNumber.className = "box"
-    document.body.appendChild(boxOfNumber)
+    workFlow.appendChild(boxOfNumber)
     let numberDiv // block element
     let numberDivToolTip // the element that will be displayed when hovering over the block element
     for (let i = 0; i < length; i++) {
@@ -44,13 +54,14 @@ function fillArrayAndCreateBlock(array, length, maxElement) {
         // size of one block / free space * 100 = the percentage of its ratio to free space
         numberDiv.style.width = (boxOfNumber.clientWidth / length) / boxOfNumber.clientWidth * 100 + "%"
         numberDiv.style.height = 0
-        numberDiv.style.left = 0
+        // numberDiv.style.left = 0
         // assign the block identifier the same as the order of the number in the array, 
         // so that I can then use this identifier when moving blocks
         numberDiv.id = i
         numberDiv.className = "number"
+        numberDiv.style.order = i
         // I use the percentage ratio to shift the blocks from the left edge so that when the screen narrows and expands, the order of the blocks is preserved
-        numberDiv.style.left = i * (boxOfNumber.clientWidth / length) / boxOfNumber.clientWidth * 100 + "%"
+        // numberDiv.style.left = i * (boxOfNumber.clientWidth / length) / boxOfNumber.clientWidth * 100 + "%"
 
         // if you need to show the number in the block itself, then uncomment the line below (it may have failures)
         // abbreviated Number(array[i]) is a function that will shorten the length of a number using a logarithm and suffixes in the form of letters
@@ -71,35 +82,57 @@ function fillArrayAndCreateBlock(array, length, maxElement) {
 }
 
 async function resideElementsById(firstElement, secondElement) {
-    let tempLeft = firstElement.style.left
-    firstElement.style.left = secondElement.style.left
-    secondElement.style.left = tempLeft
+    let tempOrder = firstElement.style.order
+    firstElement.style.order = secondElement.style.order
+    secondElement.style.order = tempOrder
 
     let tempId = firstElement.id
     firstElement.id = secondElement.id
     secondElement.id = tempId
 } 
 
-async function sortArray() {
-    await quickSort(array, 0, array.length - 1)  
-}
-
 sliderMaxNumber.oninput = function() {
-    sliderMaxNumberIndicator.innerHTML = "Max number: " + this.value;
-    array = []
+    sliderMaxNumberIndicator.innerHTML = "Max number: " + this.value
+    array = new Array(sliderCountNumber.value)
     fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
 }
 sliderCountNumber.oninput = function() {
-    sliderCountNumberIndicator.innerHTML = "Count of number: " + this.value;
-    array = []
+    sliderCountNumberIndicator.innerHTML = "Count of number: " + this.value
+    array = new Array(sliderCountNumber.value)
     fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
 }
-buttonFillArray.addEventListener("click", async function() {
-    await sortArray()
-    document.getElementById("sliderCountNumber").disabled
-    document.getElementById("sliderMaxNumber").disabled
+buttonQuickSort.addEventListener("click", async function() {
+    sliderMaxNumber.disabled = true
+    sliderCountNumber.disabled = true
+    sliderSpeedSorting.disabled = true
+    buttonInsertionSort.disabled = true
+    buttonQuickSort.disabled = true
+    await quickSort(array, 0, array.length - 1) 
+    buttonQuickSort.disabled = false
+    buttonInsertionSort.disabled = false
+    sliderMaxNumber.disabled = false
+    sliderCountNumber.disabled = false
+    sliderSpeedSorting.disabled = false 
 })
-
+buttonInsertionSort.addEventListener("click", async function() {
+    sliderMaxNumber.disabled = true
+    sliderCountNumber.disabled = true
+    sliderSpeedSorting.disabled = true
+    buttonInsertionSort.disabled = true
+    buttonQuickSort.disabled = true
+    await insertionSort(array)
+    buttonInsertionSort.disabled = false
+    buttonQuickSort.disabled = false
+    sliderMaxNumber.disabled = false
+    sliderCountNumber.disabled = false
+    sliderSpeedSorting.disabled = false
+})
+sliderSpeedSorting.oninput = function() {
+    sliderSpeedSortingIndicator.innerHTML = "Speed of sorting: " + this.value
+    speedOfSorting = this.value
+    array = new Array(sliderCountNumber.value)
+    fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
+}
 
 async function delay(delayInms) {
     return new Promise(resolve  => {

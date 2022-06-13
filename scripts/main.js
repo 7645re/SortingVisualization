@@ -3,7 +3,9 @@ var sliderMaxNumber = document.getElementsByClassName("sliderMaxNumber")[0]
 var sliderCountNumber = document.getElementsByClassName("sliderCountNumber")[0]
 var sliderSpeedSorting = document.getElementsByClassName("sliderSpeedSorting")[0]
 var buttonQuickSort = document.getElementsByClassName("buttonQuickSort")[0]
+var buttonBinarySearch = document.getElementsByClassName("buttonBinarySearch")[0]
 var buttonInsertionSort = document.getElementsByClassName("buttonInsertionSort")[0]
+var numberForBinarySearch = document.getElementsByClassName("numberForBinarySearch")[0]
 var workFlow = document.getElementsByClassName("workflow")[0]
 var sliderMaxNumberIndicator = document.getElementsByClassName("sliderMaxNumberIndicator")[0]
 var sliderCountNumberIndicator = document.getElementsByClassName("sliderCountNumberIndicator")[0]
@@ -91,6 +93,15 @@ async function resideElementsById(firstElement, secondElement) {
     secondElement.id = tempId
 } 
 
+async function paintElementsRangeById(start, end, color) {
+    let element
+    for (let i = start; i < end; i++) {
+        element = document.getElementById(i)
+        element.style.backgroundColor = color
+        await delay(speedOfSorting)
+    }
+}
+
 sliderMaxNumber.oninput = function() {
     sliderMaxNumberIndicator.innerHTML = "Max number: " + this.value
     array = new Array(sliderCountNumber.value)
@@ -113,6 +124,7 @@ buttonQuickSort.addEventListener("click", async function() {
     sliderMaxNumber.disabled = false
     sliderCountNumber.disabled = false
     sliderSpeedSorting.disabled = false 
+    console.log(array)
 })
 buttonInsertionSort.addEventListener("click", async function() {
     sliderMaxNumber.disabled = true
@@ -127,12 +139,30 @@ buttonInsertionSort.addEventListener("click", async function() {
     sliderCountNumber.disabled = false
     sliderSpeedSorting.disabled = false
 })
+buttonBinarySearch.addEventListener("click", async function() {
+    sliderMaxNumber.disabled = true
+    sliderCountNumber.disabled = true
+    sliderSpeedSorting.disabled = true
+    buttonInsertionSort.disabled = true
+    buttonQuickSort.disabled = true
+    await binarySearch(array, parseInt(numberForBinarySearch.value))
+    buttonInsertionSort.disabled = false
+    buttonQuickSort.disabled = false
+    sliderMaxNumber.disabled = false
+    sliderCountNumber.disabled = false
+    sliderSpeedSorting.disabled = false
+})
+
 sliderSpeedSorting.oninput = function() {
     sliderSpeedSortingIndicator.innerHTML = "Speed of sorting: " + this.value
     speedOfSorting = this.value
+}
+
+document.addEventListener("DOMContentLoaded", function() {
     array = new Array(sliderCountNumber.value)
     fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
-}
+    numberForBinarySearch.value = array[getRandomInt(array.length-1)]
+});
 
 async function delay(delayInms) {
     return new Promise(resolve  => {

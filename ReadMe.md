@@ -1,4 +1,14 @@
 https://7645re.github.io/SortingVisualization/
+# Features:
+- Binary search
+- Quick sorting
+- Sorting by inserts
+- Sorting by counting
+- Changing the number of number blocks
+- Changing the sound frequency when sorting
+- Changing the speed of sorting and binary search
+- Changing the maximum number when generating blocks of numbers
+
 # Visualization of sorting algorithms
 Sorts that are implemented:
 - Quick Sort

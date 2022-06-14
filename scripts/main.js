@@ -1,21 +1,26 @@
+var numbers = document.getElementsByClassName("number")
 var boxOfNumber = document.getElementsByClassName("box")[0]
+var workFlow = document.getElementsByClassName("workflow")[0]
+var sortAlgorithm = document.getElementsByClassName("sortAlgorithm")[0]
 var sliderMaxNumber = document.getElementsByClassName("sliderMaxNumber")[0]
+var buttonStartSort = document.getElementsByClassName("buttonStartSort")[0]
 var sliderCountNumber = document.getElementsByClassName("sliderCountNumber")[0]
 var sliderSpeedSorting = document.getElementsByClassName("sliderSpeedSorting")[0]
-var buttonQuickSort = document.getElementsByClassName("buttonQuickSort")[0]
 var buttonBinarySearch = document.getElementsByClassName("buttonBinarySearch")[0]
-var buttonInsertionSort = document.getElementsByClassName("buttonInsertionSort")[0]
+var buttonDeleteDuplicate = document.getElementsByClassName("buttonDeleteDuplicates")[0]
 var numberForBinarySearch = document.getElementsByClassName("numberForBinarySearch")[0]
-var workFlow = document.getElementsByClassName("workflow")[0]
 var sliderMaxNumberIndicator = document.getElementsByClassName("sliderMaxNumberIndicator")[0]
 var sliderCountNumberIndicator = document.getElementsByClassName("sliderCountNumberIndicator")[0]
 var sliderSpeedSortingIndicator = document.getElementsByClassName("sliderSpeedSortingIndicator")[0]
-var suffixs = ["", "k", "M", "G", "T", "P", "E"];
-var speedOfSorting = 10
-let array
-let flag = true
+
+let array // The main array to be used in sorting
+var speedOfSorting = 10 // a variable with which you can adjust the speed of the sorting animation
+var arrayIsSorted = false // a flag that remembers whether the array is sorted or not
+var duplicatesIsDeleted = false // a flag that remembers whether duplicates have already been removed from the array
+var suffixs = ["", "k", "M", "G", "T", "P", "E"]; // suffixes that are used to shorten large numbers
 
 
+// Fcuntion for generate random number
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -33,8 +38,8 @@ function abbreviateNumber(number) {
 // Function for creating block growth animation
 function grow(element, height) {
     if (parseInt(element.style.height) < height & (height - parseInt(element.style.height)) > 2) {
-        element.style.height = parseInt(element.style.height) + (height-parseInt(element.style.height))/100*50 + "%"
-        setTimeout(grow, 50, element, height);
+        element.style.height = parseInt(element.style.height) + (height - parseInt(element.style.height)) / 100 * 50 + "%"
+        setTimeout(grow, 35, element, height);
     }
 }
 
@@ -50,32 +55,20 @@ function fillArrayAndCreateBlock(array, length, maxElement) {
         // filling an array with random numbers
         array[i] = getRandomInt(maxElement)
         // creating and describing a block element
-        numberDiv = document.createElement("div")
-        // the width of the block is calculated using the formula: space size / number of blocks / space size * 100
-        // space size / number of blocks = size of one block
-        // size of one block / free space * 100 = the percentage of its ratio to free space
-        numberDiv.style.width = (boxOfNumber.clientWidth / length) / boxOfNumber.clientWidth * 100 + "%"
-        numberDiv.style.height = 0
-        // numberDiv.style.left = 0
         // assign the block identifier the same as the order of the number in the array, 
         // so that I can then use this identifier when moving blocks
+        numberDiv = document.createElement("div")
+        numberDiv.style.height = 0
         numberDiv.id = i
         numberDiv.className = "number"
         numberDiv.style.order = i
-        // I use the percentage ratio to shift the blocks from the left edge so that when the screen narrows and expands, the order of the blocks is preserved
-        // numberDiv.style.left = i * (boxOfNumber.clientWidth / length) / boxOfNumber.clientWidth * 100 + "%"
-
-        // if you need to show the number in the block itself, then uncomment the line below (it may have failures)
-        // abbreviated Number(array[i]) is a function that will shorten the length of a number using a logarithm and suffixes in the form of letters
-        // Example: 1000 = 1k, 1000000 = 1M
-        // if ((boxOfNumber.clientWidth / length - numberDivMargin * 2) >= 37) numberDiv.textContent = abbreviateNumber(array[i])
+        boxOfNumber.appendChild(numberDiv);
 
         // a hint that will pop up when you hover over the block
         numberDivToolTip = document.createElement("span")
         numberDivToolTip.textContent = array[i]
         numberDivToolTip.className = "tooltiptext"
         numberDiv.appendChild(numberDivToolTip);
-        boxOfNumber.appendChild(numberDiv);
 
         // calling a recursive function with settimeout to create a block growth animation
         // array[i] / max Element * 100 is a formula for calculating the percentage ratio of the block height to the total space in height
@@ -84,90 +77,130 @@ function fillArrayAndCreateBlock(array, length, maxElement) {
 }
 
 async function resideElementsById(firstElement, secondElement) {
+    // using the order property, we will change the order of the number blocks
     let tempOrder = firstElement.style.order
     firstElement.style.order = secondElement.style.order
     secondElement.style.order = tempOrder
 
+    // you also need to change the ids of the blocks, because the numbers have also changed their ids
     let tempId = firstElement.id
     firstElement.id = secondElement.id
     secondElement.id = tempId
-} 
+}
 
+// function that colors elements in a given interval
 async function paintElementsRangeById(start, end, color) {
-    let element
     for (let i = start; i < end; i++) {
-        element = document.getElementById(i)
-        element.style.backgroundColor = color
+        document.getElementById(i).style.backgroundColor = color
         await delay(speedOfSorting)
     }
 }
 
-sliderMaxNumber.oninput = function() {
+// function that sets the status of activity or inactivity for all buttons
+async function setStatusButtonsSlides(status) {
+    sliderMaxNumber.disabled = status
+    buttonStartSort.disabled = status
+    sliderCountNumber.disabled = status
+    sliderSpeedSorting.disabled = status
+    buttonBinarySearch.disabled = status
+}
+
+// function that removes duplicates from an array (and also removes duplicate blocks)
+async function deleteDuplicates(array) {
+    if (!duplicatesIsDeleted) {
+        duplicatesIsDeleted = true
+        let numbersCount = {}
+        let duplicateElement
+        let uniqueList = []
+        for (let i = 0; i < array.length; i++) {
+            if (numbersCount[array[i]] === undefined) {
+                numbersCount[array[i]] = 1
+                uniqueList.push(array[i])
+            }
+            else {
+                duplicateElement = document.getElementById(i)
+                duplicateElement.style.backgroundColor = "red"
+                await delay(speedOfSorting)
+                duplicateElement.remove()
+            }
+        }
+        let i = 0
+        Array.from(numbers).forEach(element => {
+            element.id = i
+            element.style.order = i
+            i++
+        });
+        for (let i = 0; i < uniqueList.length; i++) {
+            numbers[i].firstChild.textContent = uniqueList[i]
+            numbers[i].style.height = uniqueList[i] / parseInt(sliderMaxNumber.value) * 100 + "%"
+        }
+        boxOfNumber.style.justifyContent = "center"
+        return uniqueList
+    }
+    else return array
+}
+
+// delay function for creating animation
+async function delay(delayInms) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(2)
+        }, delayInms);
+    });
+}
+
+sliderMaxNumber.oninput = function () {
     sliderMaxNumberIndicator.innerHTML = "Max number: " + this.value
     array = new Array(sliderCountNumber.value)
+    duplicatesIsDeleted = false
+    arrayIsSorted = false
     fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
 }
-sliderCountNumber.oninput = function() {
+sliderCountNumber.oninput = function () {
     sliderCountNumberIndicator.innerHTML = "Count of number: " + this.value
     array = new Array(sliderCountNumber.value)
+    duplicatesIsDeleted = false
+    arrayIsSorted = false
     fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
 }
-buttonQuickSort.addEventListener("click", async function() {
-    sliderMaxNumber.disabled = true
-    sliderCountNumber.disabled = true
-    sliderSpeedSorting.disabled = true
-    buttonInsertionSort.disabled = true
-    buttonQuickSort.disabled = true
-    await quickSort(array, 0, array.length - 1) 
-    buttonQuickSort.disabled = false
-    buttonInsertionSort.disabled = false
-    sliderMaxNumber.disabled = false
-    sliderCountNumber.disabled = false
-    sliderSpeedSorting.disabled = false 
-    console.log(array)
-})
-buttonInsertionSort.addEventListener("click", async function() {
-    sliderMaxNumber.disabled = true
-    sliderCountNumber.disabled = true
-    sliderSpeedSorting.disabled = true
-    buttonInsertionSort.disabled = true
-    buttonQuickSort.disabled = true
-    await insertionSort(array)
-    buttonInsertionSort.disabled = false
-    buttonQuickSort.disabled = false
-    sliderMaxNumber.disabled = false
-    sliderCountNumber.disabled = false
-    sliderSpeedSorting.disabled = false
-})
-buttonBinarySearch.addEventListener("click", async function() {
-    sliderMaxNumber.disabled = true
-    sliderCountNumber.disabled = true
-    sliderSpeedSorting.disabled = true
-    buttonInsertionSort.disabled = true
-    buttonQuickSort.disabled = true
-    await binarySearch(array, parseInt(numberForBinarySearch.value))
-    buttonInsertionSort.disabled = false
-    buttonQuickSort.disabled = false
-    sliderMaxNumber.disabled = false
-    sliderCountNumber.disabled = false
-    sliderSpeedSorting.disabled = false
+buttonStartSort.addEventListener("click", async function () {
+    if (!arrayIsSorted) {
+        arrayIsSorted = true
+        setStatusButtonsSlides(true)
+        switch (sortAlgorithm.value) {
+            case ("quickSort"):
+                await quickSort(array, 0, array.length - 1)
+                break
+            case ("insertionSort"):
+                await insertionSort(array)
+                break
+            case ("countingSort"):
+                array = await countingSort(array, parseInt(sliderMaxNumber.value))
+                break
+        }
+        setStatusButtonsSlides(false)
+    }
 })
 
-sliderSpeedSorting.oninput = function() {
+buttonBinarySearch.addEventListener("click", async function () {
+    setStatusButtonsSlides(true)
+    await binarySearch(array, parseInt(numberForBinarySearch.value))
+    setStatusButtonsSlides(false)
+})
+
+buttonDeleteDuplicate.addEventListener("click", async function () {
+    array = Array.from(await deleteDuplicates(array))
+    sliderCountNumberIndicator.innerHTML = "Count of number: " + array.length
+    sliderCountNumber.value = array.length
+})
+
+sliderSpeedSorting.oninput = function () {
     sliderSpeedSortingIndicator.innerHTML = "Speed of sorting: " + this.value
     speedOfSorting = this.value
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     array = new Array(sliderCountNumber.value)
     fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
-    numberForBinarySearch.value = array[getRandomInt(array.length-1)]
+    numberForBinarySearch.value = array[getRandomInt(array.length - 1)]
 });
-
-async function delay(delayInms) {
-    return new Promise(resolve  => {
-      setTimeout(() => {
-        resolve(2)
-      }, delayInms);
-    });
-  }

@@ -9,13 +9,13 @@ body {
     font-family: 'Trebuchet MS', sans-serif;
 }
 
-
 .box {
+    justify-content: center;
     order: 1;
     background-color: rgb(67, 151, 117);
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     height: 50%;
     width: 100%;
 }
@@ -27,11 +27,14 @@ body {
     -webkit-box-sizing: border-box;
     border: 1px solid black;
 }
+
 .number {
+    flex-grow: 1;
     border-radius: 7px;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
 }
+
 .number .tooltiptext {
     visibility: hidden;
     width: 120px;
@@ -61,18 +64,13 @@ body {
     background-color: rgb(72, 191, 132);
 }
 
-
-/* input[type='range'] {
-    width: 100%;
-} */
-
-.number  {
+.number {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black; 
-  }
-  
-  .number .tooltiptext {
+    border-bottom: 1px dotted black;
+}
+
+.number .tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: #555;
@@ -80,18 +78,18 @@ body {
     text-align: center;
     padding: 5px 0;
     border-radius: 6px;
-  
+
     position: absolute;
     z-index: 1;
     bottom: 105%;
     left: 50%;
     margin-left: -60px;
-  
+
     opacity: 0;
     transition: opacity 0.3s;
-  }
-  
-  .number .tooltiptext::after {
+}
+
+.number .tooltiptext::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -100,12 +98,12 @@ body {
     border-width: 5px;
     border-style: solid;
     border-color: #555 transparent transparent transparent;
-  }
-  
-  .number:hover .tooltiptext {
+}
+
+.number:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
-  }
+}
 
 .workflow {
     margin-top: 5%;

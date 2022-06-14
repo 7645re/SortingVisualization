@@ -19,11 +19,21 @@
             <input class="sliderCountNumber" type="range"  style="width: 100%;"min="1" max="200" value="50">
             <p class="sliderSpeedSortingIndicator">Speed of sorting: 10</p>
             <input class="sliderSpeedSorting" style="width: 100%;" type="range" min="10" max="1000" value="10">
+            <label for="sorts">Choose a sorting algorithm:</label>
+                <select name="sorts" class="sortAlgorithm">
+                <option value="quickSort">Quick Sort</option>
+                <option value="insertionSort">Insertion Sort</option>
+                <option value="countingSort">Counting Sort</option>
+                </select>
+                <button class="buttonStartSort">Sort</button>
+                <button class="buttonDeleteDuplicates">
+                    Delete Duplicates</button>
             <div>
-                <button class="buttonQuickSort" name="button">QuickSort</button>
-                <button class="buttonInsertionSort" name="button">InsertionSort</button>
-                <button class="buttonBinarySearch" name="button">BinarySearch</button>
-                <input class="numberForBinarySearch" type="number" value="">
+            <div>
+                <label for="numberForBinarySearch">Choose number for binary search</label>
+                <input name="numberForBinarySearch" class="numberForBinarySearch" style="width:10%;" type="number" value="">
+                <button class="buttonBinarySearch" name="button">Search</button>
+            </div>
             </div>
         </div>
     </div>
@@ -31,5 +41,6 @@
 <script src="scripts/quickSort.js"></script>
 <script src="scripts/binarySearch.js"></script>
 <script src="scripts/insertionSort.js"></script>
+<script src="scripts/countingSort.js"></script>
 <script src="scripts/main.js"></script>
 </html>

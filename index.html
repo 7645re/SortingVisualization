@@ -17,13 +17,16 @@
             <input class="sliderMaxNumber" type="range"  style="width: 100%;" min="1" max="100000" value="50">
             <p class="sliderCountNumberIndicator">Count of number: 50</p>
             <input class="sliderCountNumber" type="range"  style="width: 100%;"min="1" max="200" value="50">
-            <p class="sliderSpeedSortingIndicator">Speed of sorting: 10</p>
-            <input class="sliderSpeedSorting" style="width: 100%;" type="range" min="10" max="1000" value="10">
+            <p class="sliderSpeedSortingIndicator">Speed of sorting: 30</p>
+            <input class="sliderSpeedSorting" style="width: 100%;" type="range" min="10" max="1000" value="30">
+            <p class="sliderFrenqurencyIndicator">Frenqurency: 0</p>
+            <input class="sliderFrenqurency" style="width: 100%;" type="range" min="10" max="1500" value="0">
             <label for="sorts">Choose a sorting algorithm:</label>
                 <select name="sorts" class="sortAlgorithm">
                 <option value="quickSort">Quick Sort</option>
                 <option value="insertionSort">Insertion Sort</option>
                 <option value="countingSort">Counting Sort</option>
+                <option value="cocktailSort">Cocktail Sort</option>
                 </select>
                 <button class="buttonStartSort">Sort</button>
             <div>
@@ -36,9 +39,13 @@
         </div>
     </div>
 </body>
+<script src="scripts/sound.js"></script>
+<script src="scripts/paint.js"></script>
 <script src="scripts/quickSort.js"></script>
+<script src="scripts/cocktailSort.js"></script>
 <script src="scripts/binarySearch.js"></script>
 <script src="scripts/insertionSort.js"></script>
 <script src="scripts/countingSort.js"></script>
+<script src="scripts/margeSort.js"></script>
 <script src="scripts/main.js"></script>
 </html>

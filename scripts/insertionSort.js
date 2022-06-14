@@ -8,17 +8,13 @@ async function insertionSort(inputArr) {
             while ((j > -1) && (current < inputArr[j])) {
                 inputArr[j+1] = inputArr[j];
 
-                let firstElement = document.getElementById(j+1)
-                let secondElement = document.getElementById(j)
-            
-                firstElement.style.backgroundColor = "red"
-                secondElement.style.backgroundColor = "red"
-                await resideElementsById(firstElement, secondElement)
+                paintElementById(j+1, "red")
+                paintElementById(j, "red")
+                await resideElementsById(j+1, j)
+                await playSound(frequency * j)
                 await delay(speedOfSorting)
-                firstElement.style.backgroundColor = "rgb(72, 191, 132)"
-                secondElement.style.backgroundColor = "rgb(72, 191, 132)"
-
-
+                paintElementById(j+1, "rgb(72, 191, 132)")
+                paintElementById(j, "rgb(72, 191, 132)")
                 j--;
             }
             inputArr[j+1] = current;

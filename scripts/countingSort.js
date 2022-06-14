@@ -2,19 +2,22 @@ async function countingSort(arr, maxNum){
    let counts = new Array(maxNum + 1);
    counts.fill(0)
    for (let i = 0; i < arr.length; i++) {
-      numbers[i].style.backgroundColor = "red"
+      paintElementById(i, "red")
+      await playSound(frequency*i)
       await delay(speedOfSorting)
-      numbers[i].style.backgroundColor = "rgb(72, 191, 132)"
+      paintElementById(i, "rgb(72, 191, 132)")
       counts[arr[i]]++
    }
    let sortedArrayIndex = 0;
    for (let i = 0; i < counts.length; i++) {
       for (let j = 0; j < counts[i]; j++) {
          arr[sortedArrayIndex] = i;
-         numbers[sortedArrayIndex].style.backgroundColor = "red"
+         paintElementById(sortedArrayIndex, "red")
+         numbers[sortedArrayIndex].firstChild.textContent = i
          numbers[sortedArrayIndex].style.height = i / maxNum * 100 + "%"
+         await playSound(frequency*sortedArrayIndex)
          await delay(speedOfSorting)
-         numbers[sortedArrayIndex].style.backgroundColor = "rgb(72, 191, 132)"
+         paintElementById(sortedArrayIndex, "rgb(72, 191, 132)")
          sortedArrayIndex++
       }
    }

@@ -22,6 +22,6 @@ function merge(left, right) {
     
     // Concatenating the leftover elements
     // (in case we didn't go through the entire left or right array)
-    console.log(arr)
+    if (arr.length > 1) console.log(arr)
     return [ ...arr, ...left, ...right ]
 }

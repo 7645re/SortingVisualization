@@ -5,17 +5,24 @@ var sortAlgorithm = document.getElementsByClassName("sortAlgorithm")[0]
 var sliderMaxNumber = document.getElementsByClassName("sliderMaxNumber")[0]
 var buttonStartSort = document.getElementsByClassName("buttonStartSort")[0]
 var sliderCountNumber = document.getElementsByClassName("sliderCountNumber")[0]
+var sliderFrenqurency = document.getElementsByClassName("sliderFrenqurency")[0]
 var sliderSpeedSorting = document.getElementsByClassName("sliderSpeedSorting")[0]
 var buttonBinarySearch = document.getElementsByClassName("buttonBinarySearch")[0]
 var numberForBinarySearch = document.getElementsByClassName("numberForBinarySearch")[0]
 var sliderMaxNumberIndicator = document.getElementsByClassName("sliderMaxNumberIndicator")[0]
 var sliderCountNumberIndicator = document.getElementsByClassName("sliderCountNumberIndicator")[0]
+var sliderFrenqurencyIndicator = document.getElementsByClassName("sliderFrenqurencyIndicator")[0]
 var sliderSpeedSortingIndicator = document.getElementsByClassName("sliderSpeedSortingIndicator")[0]
 
+let frequency = 0
+let enableSoundOfSorting = false
+let colorNnumbersDefault = "rgb(72, 191, 132)"
+let colorNnumbersSelect = "red"
 let array // The main array to be used in sorting
-var speedOfSorting = 10 // a variable with which you can adjust the speed of the sorting animation
+var speedOfSorting = 30 // a variable with which you can adjust the speed of the sorting animation
 var arrayIsSorted = false // a flag that remembers whether the array is sorted or not
 var suffixs = ["", "k", "M", "G", "T", "P", "E"]; // suffixes that are used to shorten large numbers
+var context = new (window.AudioContext || window.webkitAudioContext)();
 
 
 // Fcuntion for generate random number
@@ -74,7 +81,11 @@ function fillArrayAndCreateBlock(array, length, maxElement) {
     }
 }
 
-async function resideElementsById(firstElement, secondElement) {
+async function resideElementsById(firstId, secondId) {
+
+    let firstElement = document.getElementById(firstId)
+    let secondElement = document.getElementById(secondId)
+
     // using the order property, we will change the order of the number blocks
     let tempOrder = firstElement.style.order
     firstElement.style.order = secondElement.style.order
@@ -86,13 +97,10 @@ async function resideElementsById(firstElement, secondElement) {
     secondElement.id = tempId
 }
 
-// function that colors elements in a given interval
-async function paintElementsRangeById(start, end, color) {
-    for (let i = start; i < end; i++) {
-        document.getElementById(i).style.backgroundColor = color
-        await delay(speedOfSorting)
-    }
+async function shuffleElements() {
+
 }
+
 
 // function that sets the status of activity or inactivity for all buttons
 async function setStatusButtonsSlides(status) {
@@ -139,6 +147,9 @@ buttonStartSort.addEventListener("click", async function () {
             case ("countingSort"):
                 array = await countingSort(array, parseInt(sliderMaxNumber.value))
                 break
+            case ("cocktailSort"):
+                await cocktailSort(array)
+                break
         }
         setStatusButtonsSlides(false)
     }
@@ -153,6 +164,11 @@ buttonBinarySearch.addEventListener("click", async function () {
 sliderSpeedSorting.oninput = function () {
     sliderSpeedSortingIndicator.innerHTML = "Speed of sorting: " + this.value
     speedOfSorting = this.value
+}
+
+sliderFrenqurency.oninput = function () {
+    sliderFrenqurencyIndicator.innerHTML = "Frenqurency: " + this.value
+    frequency = this.value
 }
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -4,15 +4,13 @@ async function swap(array, leftIndex, rightIndex) {
     array[leftIndex] = array[rightIndex]
     array[rightIndex] = temp
 
-    let firstElement = document.getElementById(leftIndex)
-    let secondElement = document.getElementById(rightIndex)
-
-    firstElement.style.backgroundColor = "red"
-    secondElement.style.backgroundColor = "red"
-    await resideElementsById(firstElement, secondElement)
+    paintElementById(leftIndex, "red")
+    paintElementById(rightIndex, "red")
+    await resideElementsById(leftIndex, rightIndex)
+    await playSound(frequency)
     await delay(speedOfSorting)
-    firstElement.style.backgroundColor = "rgb(72, 191, 132)"
-    secondElement.style.backgroundColor = "rgb(72, 191, 132)"
+    paintElementById(leftIndex, "rgb(72, 191, 132)")
+    paintElementById(rightIndex, "rgb(72, 191, 132)")
 }
 
 async function partition(array, left, right) {

@@ -7,7 +7,6 @@ var buttonStartSort = document.getElementsByClassName("buttonStartSort")[0]
 var sliderCountNumber = document.getElementsByClassName("sliderCountNumber")[0]
 var sliderSpeedSorting = document.getElementsByClassName("sliderSpeedSorting")[0]
 var buttonBinarySearch = document.getElementsByClassName("buttonBinarySearch")[0]
-var buttonDeleteDuplicate = document.getElementsByClassName("buttonDeleteDuplicates")[0]
 var numberForBinarySearch = document.getElementsByClassName("numberForBinarySearch")[0]
 var sliderMaxNumberIndicator = document.getElementsByClassName("sliderMaxNumberIndicator")[0]
 var sliderCountNumberIndicator = document.getElementsByClassName("sliderCountNumberIndicator")[0]
@@ -16,7 +15,6 @@ var sliderSpeedSortingIndicator = document.getElementsByClassName("sliderSpeedSo
 let array // The main array to be used in sorting
 var speedOfSorting = 10 // a variable with which you can adjust the speed of the sorting animation
 var arrayIsSorted = false // a flag that remembers whether the array is sorted or not
-var duplicatesIsDeleted = false // a flag that remembers whether duplicates have already been removed from the array
 var suffixs = ["", "k", "M", "G", "T", "P", "E"]; // suffixes that are used to shorten large numbers
 
 
@@ -105,40 +103,6 @@ async function setStatusButtonsSlides(status) {
     buttonBinarySearch.disabled = status
 }
 
-// function that removes duplicates from an array (and also removes duplicate blocks)
-async function deleteDuplicates(array) {
-    if (!duplicatesIsDeleted) {
-        duplicatesIsDeleted = true
-        let numbersCount = {}
-        let duplicateElement
-        let uniqueList = []
-        for (let i = 0; i < array.length; i++) {
-            if (numbersCount[array[i]] === undefined) {
-                numbersCount[array[i]] = 1
-                uniqueList.push(array[i])
-            }
-            else {
-                duplicateElement = document.getElementById(i)
-                duplicateElement.style.backgroundColor = "red"
-                await delay(speedOfSorting)
-                duplicateElement.remove()
-            }
-        }
-        let i = 0
-        Array.from(numbers).forEach(element => {
-            element.id = i
-            element.style.order = i
-            i++
-        });
-        for (let i = 0; i < uniqueList.length; i++) {
-            numbers[i].firstChild.textContent = uniqueList[i]
-            numbers[i].style.height = uniqueList[i] / parseInt(sliderMaxNumber.value) * 100 + "%"
-        }
-        boxOfNumber.style.justifyContent = "center"
-        return uniqueList
-    }
-    else return array
-}
 
 // delay function for creating animation
 async function delay(delayInms) {
@@ -152,14 +116,12 @@ async function delay(delayInms) {
 sliderMaxNumber.oninput = function () {
     sliderMaxNumberIndicator.innerHTML = "Max number: " + this.value
     array = new Array(sliderCountNumber.value)
-    duplicatesIsDeleted = false
     arrayIsSorted = false
     fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
 }
 sliderCountNumber.oninput = function () {
     sliderCountNumberIndicator.innerHTML = "Count of number: " + this.value
     array = new Array(sliderCountNumber.value)
-    duplicatesIsDeleted = false
     arrayIsSorted = false
     fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
 }
@@ -186,12 +148,6 @@ buttonBinarySearch.addEventListener("click", async function () {
     setStatusButtonsSlides(true)
     await binarySearch(array, parseInt(numberForBinarySearch.value))
     setStatusButtonsSlides(false)
-})
-
-buttonDeleteDuplicate.addEventListener("click", async function () {
-    array = Array.from(await deleteDuplicates(array))
-    sliderCountNumberIndicator.innerHTML = "Count of number: " + array.length
-    sliderCountNumber.value = array.length
 })
 
 sliderSpeedSorting.oninput = function () {

@@ -14,16 +14,15 @@ var sliderCountNumberIndicator = document.getElementsByClassName("sliderCountNum
 var sliderFrenqurencyIndicator = document.getElementsByClassName("sliderFrenqurencyIndicator")[0]
 var sliderSpeedSortingIndicator = document.getElementsByClassName("sliderSpeedSortingIndicator")[0]
 
-let frequency = 0
-let alignItems = "center"
-let enableSoundOfSorting = false
-let colorNumbersDefault = "rgb(72, 191, 132)"
-let colorNumbersSelect = "red"
-let colorNumbersFinalize = "#E0BAD7"
+let frequency = 0 // variable regulating the hertz of the sorting sound
+let alignItems = "center" // initial value alignment of blocks
+let colorNumbersDefault = "rgb(72, 191, 132)" // standard block color
+let colorNumbersSelect = "red" // the color that blocks are highlighted when they are selected during the sorting process
+let colorNumbersFinalize = "#E0BAD7" // the color that blocks are highlighted when sorting is completed
 let array // The main array to be used in sorting
 var speedOfSorting = 30 // a variable with which you can adjust the speed of the sorting animation
 var arrayIsSorted = false // a flag that remembers whether the array is sorted or not
-var context = new (window.AudioContext || window.webkitAudioContext)();
+var context = new (window.AudioContext || window.webkitAudioContext)(); // context for playing the sorting sound
 
 
 // Fcuntion for generate random number

@@ -1,9 +1,10 @@
 https://7645re.github.io/SortingVisualization/
 # Features:
 - Binary search
-- Quick sorting
-- Sorting by inserts
-- Sorting by counting
+- Quick Sort
+- Insertion Sort
+- Counting Sort
+- Cocktail Sort
 - Changing the number of number blocks
 - Changing the sound frequency when sorting
 - Changing the speed of sorting and binary search
@@ -20,8 +21,16 @@ Sorts that are implemented:
 - Counting Sort
 
   ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/89273037/173661433-a8f69b2d-d506-493e-bc2a-5f526ca2583e.gif)
+- Cocktail Sort
+
+  ![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/89273037/173778208-48af8159-5c34-48e7-898b-1f0ad475a95a.gif)
+
   
 # Vizualization of search
 - Binary Search
  
   ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/89273037/173661929-2b1d48b5-d539-42b9-8b27-f57b1e8b38c2.gif)
+# Soon
+- Merge Sort
+- Redesign
+- Soften the sorting sound

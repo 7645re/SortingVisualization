@@ -5,20 +5,20 @@ var sortAlgorithm = document.getElementsByClassName("sortAlgorithm")[0]
 var sliderMaxNumber = document.getElementsByClassName("sliderMaxNumber")[0]
 var buttonStartSort = document.getElementsByClassName("buttonStartSort")[0]
 var sliderCountNumber = document.getElementsByClassName("sliderCountNumber")[0]
-var sliderFrenqurency = document.getElementsByClassName("sliderFrenqurency")[0]
+var sliderFrequency = document.getElementsByClassName("sliderFrequency")[0]
 var sliderSpeedSorting = document.getElementsByClassName("sliderSpeedSorting")[0]
 var buttonBinarySearch = document.getElementsByClassName("buttonBinarySearch")[0]
 var numberForBinarySearch = document.getElementsByClassName("numberForBinarySearch")[0]
 var sliderMaxNumberIndicator = document.getElementsByClassName("sliderMaxNumberIndicator")[0]
 var sliderCountNumberIndicator = document.getElementsByClassName("sliderCountNumberIndicator")[0]
-var sliderFrenqurencyIndicator = document.getElementsByClassName("sliderFrenqurencyIndicator")[0]
+var sliderFrequencyIndicator = document.getElementsByClassName("sliderFrequencyIndicator")[0]
 var sliderSpeedSortingIndicator = document.getElementsByClassName("sliderSpeedSortingIndicator")[0]
 
 let frequency = 0 // variable regulating the hertz of the sorting sound
 let alignItems = "center" // initial value alignment of blocks
 let colorNumbersDefault = "rgb(72, 191, 132)" // standard block color
 let colorNumbersSelect = "red" // the color that blocks are highlighted when they are selected during the sorting process
-let colorNumbersFinalize = "#E0BAD7" // the color that blocks are highlighted when sorting is completed
+let colorNumbersFinalize = colorNumbersDefault // the color that blocks are highlighted when sorting is completed
 let array // The main array to be used in sorting
 var speedOfSorting = 30 // a variable with which you can adjust the speed of the sorting animation
 var arrayIsSorted = false // a flag that remembers whether the array is sorted or not
@@ -169,8 +169,8 @@ sliderSpeedSorting.oninput = function () {
     speedOfSorting = this.value
 }
 
-sliderFrenqurency.oninput = function () {
-    sliderFrenqurencyIndicator.innerHTML = "Frenqurency: " + this.value
+sliderFrequency.oninput = function () {
+    sliderFrequencyIndicator.innerHTML = "Frequency: " + this.value
     frequency = this.value
 }
 
@@ -181,7 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.getElementsByClassName("alignItems")[0].addEventListener("click", async function () {
-    console.log(boxOfNumber.style.alignItems)
     switch (boxOfNumber.style.alignItems) {
         case ("center"):
             boxOfNumber.style.alignItems = "flex-start"

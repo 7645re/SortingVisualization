@@ -15,6 +15,7 @@ var sliderFrenqurencyIndicator = document.getElementsByClassName("sliderFrenqure
 var sliderSpeedSortingIndicator = document.getElementsByClassName("sliderSpeedSortingIndicator")[0]
 
 let frequency = 0
+let alignItems = "center"
 let enableSoundOfSorting = false
 let colorNnumbersDefault = "rgb(72, 191, 132)"
 let colorNnumbersSelect = "red"
@@ -53,6 +54,7 @@ function fillArrayAndCreateBlock(array, length, maxElement) {
     workFlow.removeChild(boxOfNumber)
     boxOfNumber = document.createElement("div")
     boxOfNumber.className = "box"
+    boxOfNumber.style.alignItems = alignItems
     workFlow.appendChild(boxOfNumber)
     let numberDiv // block element
     let numberDivToolTip // the element that will be displayed when hovering over the block element
@@ -68,6 +70,13 @@ function fillArrayAndCreateBlock(array, length, maxElement) {
         numberDiv.className = "number"
         numberDiv.style.order = i
         boxOfNumber.appendChild(numberDiv);
+        
+        numberDiv.addEventListener("click", async function () {
+            setStatusButtonsSlides(true)
+            await binarySearch(array, parseInt(this.firstChild.textContent))
+            setStatusButtonsSlides(false)
+        })
+
 
         // a hint that will pop up when you hover over the block
         numberDivToolTip = document.createElement("span")
@@ -133,6 +142,9 @@ sliderCountNumber.oninput = function () {
     arrayIsSorted = false
     fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
 }
+
+
+
 buttonStartSort.addEventListener("click", async function () {
     if (!arrayIsSorted) {
         arrayIsSorted = true
@@ -176,3 +188,17 @@ document.addEventListener("DOMContentLoaded", function () {
     fillArrayAndCreateBlock(array, sliderCountNumber.value, sliderMaxNumber.value)
     numberForBinarySearch.value = array[getRandomInt(array.length - 1)]
 });
+
+document.getElementsByClassName("alignItems")[0].addEventListener("click", async function () {
+    console.log(boxOfNumber.style.alignItems)
+    switch (boxOfNumber.style.alignItems) {
+        case ("center"):
+            boxOfNumber.style.alignItems = "flex-start"
+            break
+        case ("flex-end"):
+            boxOfNumber.style.alignItems = "center"
+            break
+        case ("flex-start"):
+            boxOfNumber.style.alignItems = "flex-end"
+    }
+})

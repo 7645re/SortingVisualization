@@ -7,7 +7,7 @@ async function swap(array, leftIndex, rightIndex) {
     paintElementById(leftIndex, "red")
     paintElementById(rightIndex, "red")
     await resideElementsById(leftIndex, rightIndex)
-    await playSound(frequency)
+    await playSound(frequency * leftIndex)
     await delay(speedOfSorting)
     paintElementById(leftIndex, "rgb(72, 191, 132)")
     paintElementById(rightIndex, "rgb(72, 191, 132)")

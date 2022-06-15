@@ -15,7 +15,7 @@ body {
     background-color: rgb(67, 151, 117);
     position: relative;
     display: flex;
-    align-items: center;
+    /* align-items: end; */
     height: 50%;
     width: 100%;
 }

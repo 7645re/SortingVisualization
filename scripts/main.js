@@ -17,28 +17,17 @@ var sliderSpeedSortingIndicator = document.getElementsByClassName("sliderSpeedSo
 let frequency = 0
 let alignItems = "center"
 let enableSoundOfSorting = false
-let colorNnumbersDefault = "rgb(72, 191, 132)"
-let colorNnumbersSelect = "red"
+let colorNumbersDefault = "rgb(72, 191, 132)"
+let colorNumbersSelect = "red"
 let array // The main array to be used in sorting
 var speedOfSorting = 30 // a variable with which you can adjust the speed of the sorting animation
 var arrayIsSorted = false // a flag that remembers whether the array is sorted or not
-var suffixs = ["", "k", "M", "G", "T", "P", "E"]; // suffixes that are used to shorten large numbers
 var context = new (window.AudioContext || window.webkitAudioContext)();
 
 
 // Fcuntion for generate random number
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-}
-
-// Function to reduce the number using prefixes
-function abbreviateNumber(number) {
-    let tier = Math.log10(Math.abs(number)) / 3 | 0;
-    if (tier == 0) return number;
-    let suffix = suffixs[tier];
-    let scale = Math.pow(10, tier * 3);
-    let scaled = number / scale;
-    return scaled.toFixed(1) + suffix;
 }
 
 // Function for creating block growth animation
@@ -194,11 +183,15 @@ document.getElementsByClassName("alignItems")[0].addEventListener("click", async
     switch (boxOfNumber.style.alignItems) {
         case ("center"):
             boxOfNumber.style.alignItems = "flex-start"
+            alignItems = "flex-start"
             break
         case ("flex-end"):
             boxOfNumber.style.alignItems = "center"
+            alignItems = "center"
             break
         case ("flex-start"):
             boxOfNumber.style.alignItems = "flex-end"
+            alignItems = "flex-end"
+            break
     }
 })

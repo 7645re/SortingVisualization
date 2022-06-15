@@ -4,13 +4,13 @@ async function swap(array, leftIndex, rightIndex) {
     array[leftIndex] = array[rightIndex]
     array[rightIndex] = temp
 
-    paintElementById(leftIndex, "red")
-    paintElementById(rightIndex, "red")
+    paintElementById(leftIndex, colorNumbersSelect)
+    paintElementById(rightIndex, colorNumbersSelect)
     await resideElementsById(leftIndex, rightIndex)
     await playSound(frequency * leftIndex)
     await delay(speedOfSorting)
-    paintElementById(leftIndex, "rgb(72, 191, 132)")
-    paintElementById(rightIndex, "rgb(72, 191, 132)")
+    paintElementById(leftIndex, colorNumbersDefault)
+    paintElementById(rightIndex, colorNumbersDefault)
 }
 
 async function partition(array, left, right) {

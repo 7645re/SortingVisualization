@@ -8,13 +8,13 @@ async function insertionSort(inputArr) {
             while ((j > -1) && (current < inputArr[j])) {
                 inputArr[j+1] = inputArr[j];
 
-                paintElementById(j+1, "red")
-                paintElementById(j, "red")
+                paintElementById(j+1, colorNumbersSelect)
+                paintElementById(j, colorNumbersSelect)
                 await resideElementsById(j+1, j)
                 await playSound(frequency * j)
                 await delay(speedOfSorting)
-                paintElementById(j+1, "rgb(72, 191, 132)")
-                paintElementById(j, "rgb(72, 191, 132)")
+                paintElementById(j+1, colorNumbersDefault)
+                paintElementById(j, colorNumbersDefault)
                 j--;
             }
             inputArr[j+1] = current;

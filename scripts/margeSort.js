@@ -1,3 +1,8 @@
+// the problem of indexing elements that are swapped for animation
+// possible solution methods:
+// non-recursive sorting
+// creating a structure object with a stored index
+// to recreate elements in the range each time
 function mergeSort(array) {
     const half = array.length / 2
     // Base case or terminating case

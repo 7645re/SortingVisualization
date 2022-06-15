@@ -9,13 +9,13 @@ async function cocktailSort(arr) {
 				arr[i] = arr[i+1];
 				arr[i+1] = temp;
 				swapped = true;
-                paintElementById(i, "red")
-                paintElementById(i+1, "red")
+                paintElementById(i, colorNumbersSelect)
+                paintElementById(i+1, colorNumbersSelect)
                 await resideElementsById(i, i+1)
                 await playSound(frequency)
                 await delay(speedOfSorting)
-                paintElementById(i, "rgb(72, 191, 132)")
-                paintElementById(i+1, "rgb(72, 191, 132)")
+                paintElementById(i, colorNumbersDefault)
+                paintElementById(i+1, colorNumbersDefault)
 			}
 		}
 
@@ -30,13 +30,13 @@ async function cocktailSort(arr) {
 				arr[i] = arr[i - 1];
 				arr[i - 1] = temp;
 				swapped = true;
-                paintElementById(i, "red")
-                paintElementById(i-1, "red")
+                paintElementById(i, colorNumbersSelect)
+                paintElementById(i-1, colorNumbersSelect)
                 await resideElementsById(i, i-1)
-                await playSound(frequency)
+                await playSound(frequency * i)
                 await delay(speedOfSorting)
-                paintElementById(i, "rgb(72, 191, 132)")
-                paintElementById(i-1, "rgb(72, 191, 132)")
+                paintElementById(i, colorNumbersDefault)
+                paintElementById(i-1, colorNumbersDefault)
 			}
 		}
 

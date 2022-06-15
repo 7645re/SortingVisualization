@@ -26,16 +26,16 @@ async function binarySearch(sortedArray, key){
 
     while (start <= end) {
         let middle = Math.floor((start + end) / 2);
-        await paintElementsRangeById(start, end+1, "red")
+        await paintElementsRangeById(start, end+1, colorNumbersSelect)
         await delay(speedOfSorting)
-        await paintElementsRangeById(start, end+1, "rgb(72, 191, 132)")
+        await paintElementsRangeById(start, end+1, colorNumbersDefault)
         if (sortedArray[middle] === key) {
             let duplicatesIndexs = await nearDuplicatesSearch(sortedArray, middle)
             // the array with indexes needs to be sorted because there may be a problem with the type [60, 59, 62]
             // and we will have elements with indexes 60, 61, 62 filled in and the index 59 will be skipped
             duplicatesIndexs.sort()
-            if (duplicatesIndexs.length > 1) await paintElementsRangeById(duplicatesIndexs[0], duplicatesIndexs.at(-1)+1, "red")
-            paintElementsRangeById(middle, middle+1, "red")
+            if (duplicatesIndexs.length > 1) await paintElementsRangeById(duplicatesIndexs[0], duplicatesIndexs.at(-1)+1, colorNumbersSelect)
+            paintElementsRangeById(middle, middle+1, colorNumbersSelect)
             return middle;
         } else if (sortedArray[middle] < key) {
             start = middle + 1;

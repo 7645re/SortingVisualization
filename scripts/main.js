@@ -19,6 +19,7 @@ let alignItems = "center"
 let enableSoundOfSorting = false
 let colorNumbersDefault = "rgb(72, 191, 132)"
 let colorNumbersSelect = "red"
+let colorNumbersFinalize = "#E0BAD7"
 let array // The main array to be used in sorting
 var speedOfSorting = 30 // a variable with which you can adjust the speed of the sorting animation
 var arrayIsSorted = false // a flag that remembers whether the array is sorted or not
@@ -110,6 +111,7 @@ async function setStatusButtonsSlides(status) {
 }
 
 
+
 // delay function for creating animation
 async function delay(delayInms) {
     return new Promise(resolve => {
@@ -152,6 +154,7 @@ buttonStartSort.addEventListener("click", async function () {
                 await cocktailSort(array)
                 break
         }
+        await finalizeElementsPaint(colorNumbersFinalize)
         setStatusButtonsSlides(false)
     }
 })

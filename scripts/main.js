@@ -6,21 +6,21 @@ var sliderMaxNumber = document.getElementsByClassName("sliderMaxNumber")[0]
 var buttonStartSort = document.getElementsByClassName("buttonStartSort")[0]
 var sliderCountNumber = document.getElementsByClassName("sliderCountNumber")[0]
 var sliderFrequency = document.getElementsByClassName("sliderFrequency")[0]
-var sliderSpeedSorting = document.getElementsByClassName("sliderSpeedSorting")[0]
+var sliderIterationDelay = document.getElementsByClassName("sliderIterationDelay")[0]
 var buttonBinarySearch = document.getElementsByClassName("buttonBinarySearch")[0]
 var numberForBinarySearch = document.getElementsByClassName("numberForBinarySearch")[0]
 var sliderMaxNumberIndicator = document.getElementsByClassName("sliderMaxNumberIndicator")[0]
 var sliderCountNumberIndicator = document.getElementsByClassName("sliderCountNumberIndicator")[0]
 var sliderFrequencyIndicator = document.getElementsByClassName("sliderFrequencyIndicator")[0]
-var sliderSpeedSortingIndicator = document.getElementsByClassName("sliderSpeedSortingIndicator")[0]
+var sliderIterationDelayIndicator = document.getElementsByClassName("sliderIterationDelayIndicator")[0]
 
 let frequency = 0 // variable regulating the hertz of the sorting sound
 let alignItems = "center" // initial value alignment of blocks
 let colorNumbersDefault = "rgb(72, 191, 132)" // standard block color
 let colorNumbersSelect = "red" // the color that blocks are highlighted when they are selected during the sorting process
-let colorNumbersFinalize = colorNumbersDefault // the color that blocks are highlighted when sorting is completed
+let colorNumbersFinalize = "#E0BAD7" // the color that blocks are highlighted when sorting is completed
 let array // The main array to be used in sorting
-var speedOfSorting = 30 // a variable with which you can adjust the speed of the sorting animation
+var IterationDelay = 30 // a variable with which you can adjust the speed of the sorting animation
 var arrayIsSorted = false // a flag that remembers whether the array is sorted or not
 var context = new (window.AudioContext || window.webkitAudioContext)(); // context for playing the sorting sound
 
@@ -101,7 +101,7 @@ async function setStatusButtonsSlides(status) {
     sliderMaxNumber.disabled = status
     buttonStartSort.disabled = status
     sliderCountNumber.disabled = status
-    sliderSpeedSorting.disabled = status
+    sliderIterationDelay.disabled = status
     buttonBinarySearch.disabled = status
 }
 
@@ -160,9 +160,9 @@ buttonBinarySearch.addEventListener("click", async function () {
     setStatusButtonsSlides(false)
 })
 
-sliderSpeedSorting.oninput = function () {
-    sliderSpeedSortingIndicator.innerHTML = "Speed of sorting: " + this.value
-    speedOfSorting = this.value
+sliderIterationDelay.oninput = function () {
+    sliderIterationDelayIndicator.innerHTML = "Iteration delay: " + this.value
+    IterationDelay = this.value
 }
 
 sliderFrequency.oninput = function () {

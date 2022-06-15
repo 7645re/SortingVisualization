@@ -2,7 +2,7 @@
 async function paintElementsRangeById(start, end, color) {
     for (let i = start; i < end; i++) {
         await paintElementById(i, color)
-        await delay(speedOfSorting)
+        await delay(IterationDelay)
     }
 }
 
@@ -13,10 +13,10 @@ async function paintElementById(id, color) {
 async function finalizeElementsPaint(color) {
     for (let i = 0; i < numbers.length; i++) {
         paintElementById(i, color)
-        await delay(speedOfSorting/2)
+        await delay(IterationDelay/2)
     }
     for (let i = 0; i < numbers.length; i++) {
         paintElementById(i, colorNumbersDefault)
-        await delay(speedOfSorting/2)
+        await delay(IterationDelay/2)
     }
 }

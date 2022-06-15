@@ -13,7 +13,7 @@ async function cocktailSort(arr) {
                 paintElementById(i+1, colorNumbersSelect)
                 await resideElementsById(i, i+1)
                 await playSound(frequency)
-                await delay(speedOfSorting)
+                await delay(IterationDelay)
                 paintElementById(i, colorNumbersDefault)
                 paintElementById(i+1, colorNumbersDefault)
 			}
@@ -34,7 +34,7 @@ async function cocktailSort(arr) {
                 paintElementById(i-1, colorNumbersSelect)
                 await resideElementsById(i, i-1)
                 await playSound(frequency * i)
-                await delay(speedOfSorting)
+                await delay(IterationDelay)
                 paintElementById(i, colorNumbersDefault)
                 paintElementById(i-1, colorNumbersDefault)
 			}

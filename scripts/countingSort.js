@@ -4,7 +4,7 @@ async function countingSort(arr, maxNum){
    for (let i = 0; i < arr.length; i++) {
       paintElementById(i, colorNumbersSelect)
       await playSound(frequency*i)
-      await delay(speedOfSorting)
+      await delay(IterationDelay)
       paintElementById(i, colorNumbersDefault)
       counts[arr[i]]++
    }
@@ -16,7 +16,7 @@ async function countingSort(arr, maxNum){
          numbers[sortedArrayIndex].firstChild.textContent = i
          numbers[sortedArrayIndex].style.height = i / maxNum * 100 + "%"
          await playSound(frequency*sortedArrayIndex)
-         await delay(speedOfSorting)
+         await delay(IterationDelay)
          paintElementById(sortedArrayIndex, colorNumbersDefault)
          sortedArrayIndex++
       }

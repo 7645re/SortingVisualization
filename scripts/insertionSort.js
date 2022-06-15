@@ -12,7 +12,7 @@ async function insertionSort(inputArr) {
                 paintElementById(j, colorNumbersSelect)
                 await resideElementsById(j+1, j)
                 await playSound(frequency * j)
-                await delay(speedOfSorting)
+                await delay(IterationDelay)
                 paintElementById(j+1, colorNumbersDefault)
                 paintElementById(j, colorNumbersDefault)
                 j--;

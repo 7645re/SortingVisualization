@@ -27,7 +27,7 @@ async function binarySearch(sortedArray, key){
     while (start <= end) {
         let middle = Math.floor((start + end) / 2);
         await paintElementsRangeById(start, end+1, colorNumbersSelect)
-        await delay(speedOfSorting)
+        await delay(IterationDelay)
         await paintElementsRangeById(start, end+1, colorNumbersDefault)
         if (sortedArray[middle] === key) {
             let duplicatesIndexs = await nearDuplicatesSearch(sortedArray, middle)

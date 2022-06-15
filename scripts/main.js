@@ -95,10 +95,6 @@ async function resideElementsById(firstId, secondId) {
     secondElement.id = tempId
 }
 
-async function shuffleElements() {
-
-}
-
 
 // function that sets the status of activity or inactivity for all buttons
 async function setStatusButtonsSlides(status) {

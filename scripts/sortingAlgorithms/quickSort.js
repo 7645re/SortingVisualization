@@ -3,14 +3,6 @@ async function swap(array, leftIndex, rightIndex) {
     let temp = array[leftIndex]
     array[leftIndex] = array[rightIndex]
     array[rightIndex] = temp
-
-    paintElementById(leftIndex, colorNumbersSelect)
-    paintElementById(rightIndex, colorNumbersSelect)
-    await resideElementsById(leftIndex, rightIndex)
-    await playSound(frequency * leftIndex)
-    await delay(IterationDelay)
-    paintElementById(leftIndex, colorNumbersDefault)
-    paintElementById(rightIndex, colorNumbersDefault)
 }
 
 async function partition(array, left, right) {
@@ -23,6 +15,13 @@ async function partition(array, left, right) {
         while (array[j] > pivot) j--
         if (i <= j) {
             await swap(array, i, j)
+            await chart.swap(i, j)
+            await chart.paintBar(i, chart.colorBarSelect)
+            await chart.paintBar(j, chart.colorBarSelect)
+            await playSound(frequency * i)
+            await delay(chart.iterationDelay)
+            await chart.paintBar(j, chart.colorBarDefault)
+            await chart.paintBar(i, chart.colorBarDefault)
             i++
             j--
         }

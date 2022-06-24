@@ -8,13 +8,14 @@ async function insertionSort(inputArr) {
             while ((j > -1) && (current < inputArr[j])) {
                 inputArr[j+1] = inputArr[j];
 
-                paintElementById(j+1, colorNumbersSelect)
-                paintElementById(j, colorNumbersSelect)
-                await resideElementsById(j+1, j)
-                await playSound(frequency * j)
-                await delay(IterationDelay)
-                paintElementById(j+1, colorNumbersDefault)
-                paintElementById(j, colorNumbersDefault)
+                chart.paintBar(j+1, chart.colorBarSelect)
+                chart.paintBar(j, chart.colorBarSelect)
+                await chart.swap(j+1, j)
+                playSound(frequency * j)
+                await delay(chart.iterationDelay)
+                chart.paintBar(j+1, chart.colorBarDefault)
+                chart.paintBar(j, chart.colorBarDefault)
+
                 j--;
             }
             inputArr[j+1] = current;

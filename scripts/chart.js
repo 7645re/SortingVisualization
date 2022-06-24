@@ -21,7 +21,7 @@ class Bar {
 }
 
 class Chart {
-    constructor({alignItems = "center", backgroundColor = "black", colorBarSelect = "#ff0000", colorBarDefault = "#48BF84", iterationDelay = 2, maxValue = 100}) {
+    constructor({alignItems = "center", backgroundColor = "black", colorBarSelect = "red", colorBarDefault = "white", iterationDelay = 2, maxValue = 100}) {
         this.array
         this.maxValue = maxValue
         this.isSorted = false
@@ -83,7 +83,7 @@ class Chart {
         else this.fillArrayRandom(parseInt(count), maxNumber)
         this.maxValue = maxNumber
         for (let i = 0; i < this.array.length; i++) {
-            bar = new Bar({backgroundColor: "rgb(72, 191, 132)", 
+            bar = new Bar({backgroundColor: "white", 
              height: (this.array[i] / (this.coverageInterval ? count : maxNumber) * 100),
              heightPercentage: true, order: i, id: i, value: this.array[i]})
             this.setBar(bar)

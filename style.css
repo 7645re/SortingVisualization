@@ -5,14 +5,14 @@ body {
     margin: 0%;
     overflow: hidden;
     position: relative;
-    background-color: rgb(42, 71, 71);
+    background-color: black;
     font-family: 'Trebuchet MS', sans-serif;
 }
 
 .box {
     justify-content: center;
     order: 1;
-    background-color: rgb(67, 151, 117);
+    background-color: "black";
     position: relative;
     display: flex;
     /* align-items: end; */
@@ -21,7 +21,7 @@ body {
 }
 
 .box * {
-    background-color: rgb(72, 191, 132);
+    background-color: "white";
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -60,9 +60,10 @@ body {
     justify-content: center;
     width: 100%;
     /* top: 65%; */
-    background-color: rgb(72, 191, 132);
 }
-
+body {
+    color: white
+}
 .number {
     position: relative;
     display: inline-block;

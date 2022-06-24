@@ -99,7 +99,7 @@ sliderFrequency.oninput = function () {
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-    chart = new Chart({backgroundColor: "rgb(67, 151, 117)", alignItems: "flex-end", maxValue: parseInt(sliderCountNumber.value)})
+    chart = new Chart({backgroundColor: "black", alignItems: "flex-end", maxValue: parseInt(sliderCountNumber.value)})
     chart.setup(workFlow)
     chart.fill(sliderCountNumber.value, sliderMaxNumber.value)
 });

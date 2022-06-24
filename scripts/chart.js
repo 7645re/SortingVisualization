@@ -21,7 +21,7 @@ class Bar {
 }
 
 class Chart {
-    constructor({alignItems = "center", backgroundColor = "black", colorBarSelect = "#ff0000", colorBarDefault = "#48BF84", iterationDelay = 30, maxValue = 100}) {
+    constructor({alignItems = "center", backgroundColor = "black", colorBarSelect = "#ff0000", colorBarDefault = "#48BF84", iterationDelay = 2, maxValue = 100}) {
         this.array
         this.maxValue = maxValue
         this.isSorted = false

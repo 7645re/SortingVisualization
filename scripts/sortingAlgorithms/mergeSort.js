@@ -31,6 +31,7 @@ async function merge(arr, start, mid, end)
                 await chart.changeBarHeight(index, 
                     chart.coverageInterval ? arr[index - 1] / chart.array.length * 100 : arr[index - 1] / chart.maxNumber * 100)
                 arr[index] = arr[index - 1];
+                playSound(frequency*index)
                 await delay(chart.iterationDelay)
                 await chart.paintBar(index, chart.colorBarDefault)
                 index--;
@@ -39,6 +40,7 @@ async function merge(arr, start, mid, end)
             await chart.paintBar(start, chart.colorBarSelect)
             await chart.changeBarHeight(index, 
                 chart.coverageInterval ? value / chart.array.length * 100 : value / chart.maxNumber * 100)
+            playSound(frequency*start)
             await delay(chart.iterationDelay)
             await chart.paintBar(start, chart.colorBarDefault)
             // Update all the pointers

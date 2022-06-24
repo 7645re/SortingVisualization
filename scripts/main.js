@@ -12,13 +12,9 @@ var sliderIterationDelayIndicator = document.getElementsByClassName("sliderItera
 var coverageInterval = document.getElementById("coverageInterval")
 
 let frequency = 0 // variable regulating the hertz of the sorting sound
-let colorNumbersDefault = "#48BF84" // standard block color
-let colorNumbersSelect = "red" // the color that blocks are highlighted when they are selected during the sorting process
-let colorNumbersFinalize = "#E0BAD7" // the color that blocks are highlighted when sorting is completed
-var IterationDelay = 30 // a variable with which you can adjust the speed of the sorting animation
-var arrayIsSorted = false // a flag that remembers whether the array is sorted or not
 var context = new (window.AudioContext || window.webkitAudioContext)(); // context for playing the sorting sound
 var chart
+var maxNumberDivHide = true
 
 // Fcuntion for generate random number
 function getRandomInt(max) {
@@ -31,7 +27,6 @@ async function setStatusButtonsSlides(status) {
     buttonStartSort.disabled = status
     sliderCountNumber.disabled = status
     sliderIterationDelay.disabled = status
-    // buttonBinarySearch.disabled = status
 }
 
 // delay function for creating animation
@@ -55,6 +50,16 @@ sliderCountNumber.oninput = function () {
 }
 
 coverageInterval.oninput = function () {
+    if (maxNumberDivHide) {
+        sliderMaxNumber.style.display = ""
+        sliderMaxNumberIndicator.style.display = ""
+        maxNumberDivHide = false
+    }
+    else {
+        sliderMaxNumber.style.display = "none"
+        sliderMaxNumberIndicator.style.display = "none"
+        maxNumberDivHide = true
+    }
     chart.coverageInterval = coverageInterval.checked
 }
 
@@ -73,6 +78,9 @@ buttonStartSort.addEventListener("click", async function () {
                 break
             case ("cocktailSort"):
                 await chart.cocktailSort()
+                break
+            case ("mergeSort"):
+                await chart.mergeSort()
                 break
         }
         setStatusButtonsSlides(false)

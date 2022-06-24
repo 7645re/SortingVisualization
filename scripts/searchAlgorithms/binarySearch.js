@@ -37,7 +37,7 @@ async function binarySearch(sortedArray, key){
             // the array with indexes needs to be sorted because there may be a problem with the type [60, 59, 62]
             // and we will have elements with indexes 60, 61, 62 filled in and the index 59 will be skipped
             duplicatesIndexs.sort()
-            if (duplicatesIndexs.length > 1) await chart.paintBarRange(duplicatesIndexs[0], duplicatesIndexs.at(-1)+1, colorNumbersSelect)
+            if (duplicatesIndexs.length > 1) await chart.paintBarRange(duplicatesIndexs[0], duplicatesIndexs.at(-1)+1, chart.colorBarSelect)
             chart.paintBarRange(middle, middle+1, chart.colorBarSelect)
             return middle;
         } else if (sortedArray[middle] < key) {

@@ -1,5 +1,5 @@
 class Bar {
-    constructor({backgroundColor = "white", borderRadius = 7, height = 0, heightPercentage = false, id = 0, order, value}) {
+    constructor({backgroundColor = "white", borderRadius = 0, height = 0, heightPercentage = false, id = 0, order, value}) {
         this.div = document.createElement("div")
         this.div.id = id
         this.div.style.order = order
@@ -150,6 +150,12 @@ class Chart {
 
     async countingSort() {
         this.array = await countingSort(this.array, this.coverageInterval ? this.array.length : this.maxValue)
+        await this.finalize()
+        this.isSorted = true
+    }
+
+    async mergeSort() {
+        await mergeSort(this.array, 0, this.array.length-1)
         await this.finalize()
         this.isSorted = true
     }

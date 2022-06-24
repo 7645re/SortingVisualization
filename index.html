@@ -19,8 +19,8 @@
                 <input type="checkbox" id="coverageInterval" name="coverageInterval" checked>
                 <label for="coverageInterval">Full coverage of the element interval</label>
               </div>
-            <p class="sliderMaxNumberIndicator">Max number: 50</p>
-            <input class="sliderMaxNumber" type="range" style="width: 100%;" min="1" max="1000" value="50">
+            <p class="sliderMaxNumberIndicator" style="display: none;">Max number: 50</p>
+            <input class="sliderMaxNumber" style="display: none; width: 100%;" type="range" style="width: 100%;" min="1" max="1000" value="50">
             <p class="sliderCountNumberIndicator">Count of number: 50</p>
             <input class="sliderCountNumber" type="range" style="width: 100%;" min="1" max="200" value="50">
             <p class="sliderIterationDelayIndicator">Iteration delay: 30</p>
@@ -33,6 +33,7 @@
                 <option value="insertionSort">Insertion Sort</option>
                 <option value="countingSort">Counting Sort</option>
                 <option value="cocktailSort">Cocktail Sort</option>
+                <option value="mergeSort">Merge Sort</option>
             </select>
             <button class="buttonStartSort">Sort</button>
         </div>
@@ -45,6 +46,7 @@
 <script src="scripts/sortingAlgorithms/quickSort.js"></script>
 <script src="scripts/sortingAlgorithms/insertionSort.js"></script>
 <script src="scripts/sortingAlgorithms/cocktailSort.js"></script>
+<script src="scripts/sortingAlgorithms/mergeSort.js"></script>
 <script src="scripts/chart.js"></script>
 <script src="scripts/main.js"></script>
 

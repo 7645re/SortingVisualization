@@ -35,7 +35,7 @@ async function cocktailSort(arr) {
 				chart.paintBar(i, chart.colorBarSelect)
 				chart.paintBar(i-1, chart.colorBarSelect)
 				await chart.swap(i, i-1)
-				playSound(100 * i)
+				playSound(frequency * i)
                 await delay(chart.iterationDelay)
 				chart.paintBar(i, chart.colorBarDefault)
 				chart.paintBar(i-1, chart.colorBarDefault)

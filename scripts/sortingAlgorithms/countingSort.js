@@ -4,7 +4,7 @@ async function countingSort(arr, maxNum){
    counts.fill(0)
    for (let i = 0; i < arr.length; i++) {
       chart.paintBar(i, chart.colorBarSelect)
-      paintElementById(i, colorNumbersSelect)
+      playSound(frequency*i)
       await delay(IterationDelay)
       chart.paintBar(i, chart.colorBarDefault)
       counts[arr[i]]++

@@ -149,7 +149,7 @@ class Chart {
     }
 
     async countingSort() {
-        this.array = await countingSort(this.array, this.maxValue)
+        this.array = await countingSort(this.array, this.coverageInterval ? this.array.length : this.maxValue)
         await this.finalize()
         this.isSorted = true
     }

@@ -27,6 +27,7 @@ async function setStatusButtonsSlides(status) {
     buttonStartSort.disabled = status
     sliderCountNumber.disabled = status
     sliderIterationDelay.disabled = status
+    coverageInterval.disabled = status
 }
 
 // delay function for creating animation

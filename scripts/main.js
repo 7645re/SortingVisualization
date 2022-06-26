@@ -62,6 +62,7 @@ coverageInterval.oninput = function () {
         maxNumberDivHide = true
     }
     chart.coverageInterval = coverageInterval.checked
+    chart.fill(sliderCountNumber.value, sliderMaxNumber.value)
 }
 
 buttonStartSort.addEventListener("click", async function () {

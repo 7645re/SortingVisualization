@@ -7,7 +7,6 @@ class Bar {
         this.div.style.position = "relative"
         this.div.style.boxSizing = "border-box"
         this.div.style.display = "inline-block"
-        this.div.style.border = "1px solid black"
         this.div.style.backgroundColor = backgroundColor
         this.div.style.borderTopLeftRadius = borderRadius + "px"
         this.div.style.borderTopRightRadius = borderRadius + "px"
@@ -115,14 +114,14 @@ class Chart {
     }
 
     async finalize() {
-        for (let i = 0; i < this.array.length; i++) {
-            await this.paintBar(i, this.colorBarSelect)
-            await delay(this.iterationDelay/i)
-        }
-        for (let i = 0; i < this.array.length; i++) {
-            await this.paintBar(i, this.colorBarDefault)
-            await delay(this.iterationDelay/i)
-        }
+        // for (let i = 0; i < this.array.length; i++) {
+        //     await this.paintBar(i, this.colorBarSelect)
+        //     await delay(this.iterationDelay/i)
+        // }
+        // await delay(this.iterationDelay*10)
+        // for (let i = 0; i < this.array.length; i++) {
+        //     await this.paintBar(i, this.colorBarDefault)
+        // }
     }
 
     async changeBarHeight(id, height) {
@@ -131,7 +130,7 @@ class Chart {
     }
 
     async quickSort() {
-        await quickSort(this.array, 0, chart.array.length - 1)
+        await quickSort(this.array, 0, this.array.length - 1)
         await this.finalize()
         this.isSorted = true
     }

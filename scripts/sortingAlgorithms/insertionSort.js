@@ -7,7 +7,6 @@ async function insertionSort(inputArr) {
             let j = i-1; 
             while ((j > -1) && (current < inputArr[j])) {
                 inputArr[j+1] = inputArr[j];
-
                 chart.paintBar(j+1, chart.colorBarSelect)
                 chart.paintBar(j, chart.colorBarSelect)
                 await chart.swap(j+1, j)
@@ -15,7 +14,6 @@ async function insertionSort(inputArr) {
                 await delay(chart.iterationDelay)
                 chart.paintBar(j+1, chart.colorBarDefault)
                 chart.paintBar(j, chart.colorBarDefault)
-
                 j--;
             }
             inputArr[j+1] = current;

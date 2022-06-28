@@ -1,36 +1,39 @@
 https://7645re.github.io/SortingVisualization/
 # Features:
 - Binary search
-- Quick Sort
-- Insertion Sort
-- Counting Sort
-- Cocktail Sort
+- Quick sort, Insertion sort, Counting Sort, Cocktail sort, Merge sort
 - Changing the number of number blocks
 - Changing the sound frequency when sorting
-- Changing the speed of sorting and binary search
+- Changing the delay between iterations
 - Changing the maximum number when generating blocks of numbers
+- Ability to enable full coverage of the range of numbers
 
 # Visualization of sorting algorithms
 Sorts that are implemented:
 - Quick Sort
 
-  ![ezgif com-gif-maker](https://user-images.githubusercontent.com/89273037/173660216-fef5f93d-c733-4a91-9570-f7ad7a866ac8.gif)
+  ![ezgif com-gif-maker](https://user-images.githubusercontent.com/89273037/176277077-27cbc3eb-d116-4e80-81d0-037611eb34c2.gif)
+  
+- Merge Sort
+
+  ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/89273037/176278269-79d45bdf-a58c-4237-b44b-01d2b5dc2aae.gif)
+
 - Insertion Sort
 
-  ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/89273037/173661134-576945b2-db75-4a3a-a481-73c3ac79949f.gif)
-- Counting Sort
+  ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/89273037/176277738-ad0c9479-3560-4d1a-8cbb-d18aa3bb3194.gif)
 
-  ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/89273037/173661433-a8f69b2d-d506-493e-bc2a-5f526ca2583e.gif)
 - Cocktail Sort
 
-  ![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/89273037/173778208-48af8159-5c34-48e7-898b-1f0ad475a95a.gif)
+  ![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/89273037/176278395-65ecbf46-2126-4fa6-920a-c6312b1e1909.gif)
 
+- Counting Sort
+
+  ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/89273037/176277959-4fc82b5a-4923-4659-85ce-f4dc22028451.gif)
   
 # Vizualization of search
 - Binary Search
+
+  ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/89273037/176278729-7e745a44-7198-426a-baae-640be46a62b1.gif)
  
-  ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/89273037/173661929-2b1d48b5-d539-42b9-8b27-f57b1e8b38c2.gif)
 # Soon
-- Merge Sort
-- Redesign
 - Soften the sorting sound

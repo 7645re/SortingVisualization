@@ -12,9 +12,11 @@ class Bar {
         this.div.style.borderTopRightRadius = borderRadius + "px"
         this.div.style.height = heightPercentage ? height + "%" : height + "px"
         this.div.addEventListener("click", async function () {
-            setStatusButtonsSlides(true)
-            await binarySearch(chart.array, parseInt(value))
-            setStatusButtonsSlides(false)
+            if (chart.isSorted) {
+                setStatusButtonsSlides(true)
+                await binarySearch(chart.array, parseInt(value))
+                setStatusButtonsSlides(false)
+            }
         })
     }
 }

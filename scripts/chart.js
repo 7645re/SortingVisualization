@@ -106,24 +106,13 @@ class Chart {
         secondElement.id = tempId
     }
 
-    async paintBar(id, color) { document.getElementById(id).style.backgroundColor = color }
+    paintBar(id, color) { document.getElementById(id).style.backgroundColor = color }
 
     async paintBarRange(id1, id2, color) {
         for (let i = id1; i < id2; i++) {
-            await this.paintBar(i, color)
+            this.paintBar(i, color)
             await delay(this.iterationDelay)
         }
-    }
-
-    async finalize() {
-        // for (let i = 0; i < this.array.length; i++) {
-        //     await this.paintBar(i, this.colorBarSelect)
-        //     await delay(this.iterationDelay/i)
-        // }
-        // await delay(this.iterationDelay*10)
-        // for (let i = 0; i < this.array.length; i++) {
-        //     await this.paintBar(i, this.colorBarDefault)
-        // }
     }
 
     async changeBarHeight(id, height) {
@@ -133,31 +122,26 @@ class Chart {
 
     async quickSort() {
         await quickSort(this.array, 0, this.array.length - 1)
-        await this.finalize()
         this.isSorted = true
     }
 
     async insertionSort() {
         await insertionSort(this.array)
-        await this.finalize()
         this.isSorted = true
     }
 
     async cocktailSort() {
         await cocktailSort(this.array)
-        await this.finalize()
         this.isSorted = true
     }
 
     async countingSort() {
         this.array = await countingSort(this.array, this.coverageInterval ? this.array.length : this.maxValue)
-        await this.finalize()
         this.isSorted = true
     }
 
     async mergeSort() {
         await mergeSort(this.array, 0, this.array.length-1)
-        await this.finalize()
         this.isSorted = true
     }
 }

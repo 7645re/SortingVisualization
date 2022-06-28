@@ -32,7 +32,8 @@ Sorts that are implemented:
   
 # Vizualization of search
 - Binary Search
+
+  ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/89273037/176278729-7e745a44-7198-426a-baae-640be46a62b1.gif)
  
-  ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/89273037/173661929-2b1d48b5-d539-42b9-8b27-f57b1e8b38c2.gif)
 # Soon
 - Soften the sorting sound
